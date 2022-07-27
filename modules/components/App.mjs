@@ -8,8 +8,9 @@ const styles = {
 }
 
 export default {
+    inject: ['$stores'],
     template: `<div class="${globalStyles} ${styles.wrapper}">
-        <h1>Hello, World!</h1>
+        {{$stores.channels.channelList}}
     </div>`,
 };
 
