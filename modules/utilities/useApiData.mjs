@@ -30,16 +30,24 @@ export default (defaultData, fetcher) => {
             get: () => state.status !== STATUS.LOADING,
         },
         isFetched: {
-            get: () => typeof state.data !== 'undefined',
+            get: () => typeof state.data !== defaultData,
         },
         isRefetching: {
             get: () => state.isFetched && state.isLoading,
         },
         isStale: {
-            get: () => typeof state.data === 'undefined',
+            get: () => typeof state.data === defaultData,
         }
     });
     const stateRef = Vue.ref(state);
+    state.reset = () => Object.assign(stateRef.value, {
+        data: defaultData,
+        status: STATUS.EMPTY,
+        dataUpdatedAt: Date.now(),
+        error: null,
+        errorUpdatedAt: Date.now(),
+        failureCount: 0,
+    });
     state.fetch = async (...args) => {
         if (state.isLoading) return;
         stateRef.value.status = STATUS.LOADING;
