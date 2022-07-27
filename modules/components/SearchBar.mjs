@@ -3,7 +3,21 @@ import { mapState } from '../stores/index.mjs';
 
 const styles = {
     form: css`
-        
+        border: 0.1rem solid #d1d1d1;
+        cursor: text;
+    `,
+    pill: css`
+        display: inline-block;
+        color: white;
+        font-size: 0.75em;
+        background: rgb(185,19,141);
+        border-radius: 1em;
+        padding: 2px 10px;
+        margin: 2px;
+    `,
+    input: css`
+        width: auto !important;
+        border: none !important;
     `
 }
 
