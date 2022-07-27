@@ -1,5 +1,7 @@
 import { css } from '../deps.mjs';
+import SearchBar from './SearchBar.mjs';
 import globalStyles from '../globalStyles.mjs';
+import { mapState } from '../stores/index.mjs';
 
 const styles = {
     wrapper: css`
@@ -8,9 +10,13 @@ const styles = {
 }
 
 export default {
-    inject: ['$stores'],
+    components: { SearchBar },
     template: `<div class="${globalStyles} ${styles.wrapper}">
-        {{$stores.channels.channelList}}
+        <SearchBar />
+        {{channelList.isLoading}}
+        <span v-if="channelList.isLoading">It's loading</span>
+        {{channelList}}
     </div>`,
+    computed: mapState('channels', 'channelList'), 
 };
 
